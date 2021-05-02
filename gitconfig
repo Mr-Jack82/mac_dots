@@ -1,0 +1,75 @@
+[use]
+	name = Vitaly
+	email = blackjack358@gmail.com
+[core]
+	editor = nvim
+	autocrlf = false
+	safecrlf = true
+	quotepath = off
+	pager = diff-so-fancy | less --tabs=2 -RFX
+	excludesfile = /Users/leeroy/.gitignore_global
+[merge]
+	tool = vimdiff
+[mergetool "fugutive"]
+    cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+    keepBackup = false
+[color]
+	ui = true
+[alias]
+    co = checkout
+    cb = checkout -b
+    di = diff
+    dc = diff --cached
+    aa = add --all
+    ff = merge --ff-only
+    pullff = pull --ff-only
+    noff = merge --no-ff
+    pom = push origin master
+    ci = commit
+    st = status
+    br = branch
+    hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    l = log --simplify-merges --graph --pretty="tformat:%C(yellow)%h%Creset\\ %Cgreen(%ar)%Creset\\ %C(blue)<%an>%Creset\\ %C(red)%d%Creset\\ %s"
+    type = cat-file -t
+    dump = cat-file -p
+	commend = commit --amend --no-edit  # sticks all indexed files to latest commit
+	please = push --force-with-lease    # check a local copy before rewrite
+	stsh = stash --keep-index           # stash only unstaged changes to tracked files
+	staash = stash --include-untracked  # stash any changes to tracked files
+	staaash = stash --all               # stash ignored, untracked, and tracked files
+[push]
+	default = current
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 52
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[pull]
+	rebase = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/leeroy/.stCommitMsg
+[user]
+	email = blackjack358@gmail.com
+	name = Виталий Шевченко
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[diff-so-fancy]
+	changeHunkIndicators = false

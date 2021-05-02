@@ -1,0 +1,24 @@
+Host *
+	AddKeysToAgent yes
+	UseKeychain yes
+	IdentityFile ~/.ssh/id_ed25519
+
+# --- Sourcetree Generated ---
+Host Mr-Jack82-GitHub
+	HostName github.com
+	User Mr-Jack82
+	PreferredAuthentications publickey
+	IdentityFile /Users/leeroy/.ssh/Mr-Jack82-GitHub
+	UseKeychain yes
+	AddKeysToAgent yes
+# ----------------------------
+
+# --- Sourcetree Generated ---
+Host Mr_Jack82-GitHub
+	HostName github.com
+	User Mr_Jack82
+	PreferredAuthentications publickey
+	IdentityFile /Users/leeroy/.ssh/Mr_Jack82-GitHub
+	UseKeychain yes
+	AddKeysToAgent yes
+# ----------------------------
