@@ -23,6 +23,7 @@ u.opt("o", "splitbelow", true)
 u.opt("o", "splitright", true)
 u.opt("o", "completeopt", "menuone,noinsert,noselect")
 u.opt("o", "inccommand", "nosplit")
+u.opt("o", "timeoutlen", 500)
 
 -- Window
 u.opt("w", "relativenumber", Opts.relativenumber)

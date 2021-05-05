@@ -5,6 +5,7 @@ return require("packer").startup(
         -- LSP, Autocomplete and snippets
         use {
             "neovim/nvim-lspconfig",
+            "glepnir/lspsaga.nvim",
             "hrsh7th/nvim-compe",
             "sbdchd/neoformat",
             "hrsh7th/vim-vsnip",
@@ -47,6 +48,7 @@ return require("packer").startup(
             "mbbill/undotree",
             "mhinz/vim-startify",
             "b3nj5m1n/kommentary",
+            "folke/which-key.nvim",
             "windwp/nvim-autopairs",
             "norcalli/nvim-colorizer.lua",
             "kyazdani42/nvim-web-devicons",
@@ -71,11 +73,10 @@ return require("packer").startup(
 
         -- Themes
         use {
-            "marko-cerovac/material.nvim",
+            "rakr/vim-one",
             "morhetz/gruvbox",
             {"dracula/vim", as = "dracula"},
             "christianchiarulli/nvcode-color-schemes.vim",
-            "GustavoPrietoP/doom-one.vim",
             {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
         }
     end
