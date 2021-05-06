@@ -23,7 +23,6 @@ u.map("n", "<A-t>", ":ToggleTerm<CR>")
 u.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 -- u.map("i", "{<Enter>", "{<Enter>}<Esc>O")
 
-<<<<<<< HEAD
 -- Remap for dealing with word wrap in Normal mode
 u.map("n", "k", 'v:count == 0 ? "gk" : "k"', {expr = true})
 u.map("n", "j", 'v:count == 0 ? "gj" : "j"', {expr = true})
