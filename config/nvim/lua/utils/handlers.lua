@@ -50,6 +50,27 @@ for _, v in pairs(servers) do
     end
 end
 
+-- Options
+if Opts.relativenumber == nil then
+    Opts.relativenumber = true
+end
+
+if Opts.timeoutlen == nil or Opts.timeoutlen < 0 then
+    Opts.timeoutlen = 500
+end
+
+if Opts.scrolloff == nil or Opts.scrolloff < 0 then
+    Opts.scrolloff = 10
+end
+
+if Opts.wrap == nil then
+    Opts.wrap = false
+end
+
+if Opts.cursorline == nil then
+    Opts.cursorline = true
+end
+
 -- Completion
 if Completion.items < 1 or Completion.items == nil then
     Completion.items = 15
@@ -60,7 +81,7 @@ if Completion.enabled == nil then
 end
 
 if Completion.snippets == nil or Completion.snippets == true then
-    Completion.snippets = {kind = " ﬌ (Snippet)"}
+    Completion.snippets = {priority = 1500, kind = " ﬌ (Snippet)"}
 end
 
 if Completion.lsp == nil or Completion.lsp == true then

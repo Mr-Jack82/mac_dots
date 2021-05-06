@@ -41,7 +41,6 @@ require("which-key").setup {
 
 local opts = {
     mode = "n", -- NORMAL mode
-    prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -49,92 +48,136 @@ local opts = {
 }
 
 local mappings = {
-    ["b"] = "Show Buffers",
-    ["q"] = "Quit Buffer",
-    ["w"] = "Save",
-    ["e"] = "Explorer",
-    ["u"] = "UndoTree",
-    ["h"] = "No Highlight",
-    ["x"] = "Shellcheck",
-    ["["] = {"<cmd>bprev<cr>", "Prev Buffer"},
-    ["]"] = {"<cmd>bnext<cr>", "Next Buffer"},
-    f = {
-        name = "find",
-        c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
-        f = {"<cmd>Telescope find_files<cr>", "File"},
-        g = {"<cmd>Telescope live_grep<cr>", "Text"},
-        h = {"<cmd>Telescope help_tags<cr>", "Vim Tags"},
-        n = {"<cmd>lua require('utils.core').search_nvim()<cr>", "Nvim dotfiles"},
-        o = {"<cmd>Telescope oldfiles<cr>", "Recent Files"}
+    ["<leader>"] = {
+        ["!"] = "close all buffers but current",
+        ["*"] = "save all buffers",
+        ["b"] = "show buffers",
+        ["q"] = "quit buffer",
+        ["w"] = "save",
+        ["e"] = "explorer",
+        ["u"] = "undotree",
+        ["h"] = "no highlight",
+        ["["] = {"<cmd>bprev<cr>", "prev buffer"},
+        ["]"] = {"<cmd>bnext<cr>", "next buffer"},
+        f = {
+            name = "find",
+            c = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
+            f = {"<cmd>Telescope find_files<cr>", "file"},
+            g = {"<cmd>Telescope live_grep<cr>", "grep text"},
+            h = {"<cmd>Telescope help_tags<cr>", "vim tags"},
+            n = {"<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"},
+            o = {"<cmd>Telescope oldfiles<cr>", "recent files"},
+            p = "personal config",
+            pc = {"<cmd>e ~/.config/nvim/lua/config.lua<cr>", "config"},
+            pi = {"<cmd>e ~/.config/nvim/lua/init.lua<cr>", "init"},
+            pp = {"<cmd>e ~/.config/nvim/lua/plugins.lua<cr>", "plugins"},
+            ps = {"split"},
+            psc = {"<cmd>vsp ~/.config/nvim/lua/config.lua<cr>", "split config"},
+            psi = {"<cmd>vsp ~/.config/nvim/lua/init.lua<cr>", "split init"},
+            psp = {"<cmd>vsp ~/.config/nvim/lua/plugins.lua<cr>", "split plugins"}
+        },
+        n = {
+            name = "new",
+            f = "create new file",
+            s = "create new file in a split",
+            t = "create new file in tab"
+        },
+        g = {
+            name = "git",
+            f = {"<cmd>Telescope git_files<cr>", "files"},
+            c = {"<cmd>Telescope git_commits<cr>", "commits"},
+            b = {"<cmd>Telescope git_branches<cr>", "branches"},
+            s = {"<cmd>Telescope git_status<cr>", "status"},
+            n = {"<cmd>Gitsigns next_hunk<cr>", "next hunk"},
+            p = {"<cmd>Gitsigns prev_hunk<cr>", "prev hunk"},
+            v = {"<cmd>Gitsigns preview_hunk<cr>", "preview hunk"},
+            r = {"<cmd>Gitsigns reset_hunk<cr>", "reset hunk"},
+            R = {"<cmd>Gitsigns reset_buffer<cr>", "reset buffer"}
+        },
+        l = {
+            name = "LSP",
+            a = {"<cmd>Lspsaga code_action<cr>", "code action"},
+            A = {"<cmd>Lspsaga range_code_action<cr>", "selected action"},
+            d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics"},
+            D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "workspace diagnostics"},
+            l = {"<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics"},
+            f = {"<cmd>Lspsaga lsp_finder<cr>", "LSP finder"},
+            i = {"<cmd>LspInfo<cr>", "LSP info"},
+            k = {"<cmd>Lspsaga signature_help<cr>", "LSP signature help"},
+            h = {"<cmd>Lspsaga hover_doc<cr>", "hover document"},
+            F = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "format"},
+            p = {"<cmd>Lspsaga preview_definition<cr>", "preview definition"},
+            r = {"<cmd>Lspsaga rename<cr>", "rename"},
+            s = {"<cmd>Telescope lsp_document_symbols<cr>", "document symbols"},
+            S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "workspace symbols"},
+            ["'"] = "LSP start",
+            ["'t"] = {"<cmd>LspStart TsServer<cr>", "javascript, typescript"},
+            ["'e"] = {"<cmd>LspStart emmet_ls<cr>", "emmet"},
+            ["'b"] = {"<cmd>LspStart bashls<cr>", "bash"},
+            ["'l"] = {"<cmd>LspStart sumneko_lua<cr>", "lua"},
+            ["'c"] = {"<cmd>LspStart clangd<cr>", "C/C++"},
+            ["'j"] = {"<cmd>LspStart jsonls<cr>", "json"},
+            ["'p"] = {"<cmd>LspStart pyright<cr>", "python"},
+            ["'L"] = {"<cmd>LspStart texlab<cr>", "latex"},
+            ["'h"] = {"<cmd>LspStart html<cr>", "HTML"},
+            ["'C"] = {"<cmd>LspStart cssls<cr>", "CSS"},
+            ["."] = {"LSP stop"},
+            [".a"] = {"<cmd>LspStop<cr>", "stop all"},
+            [".s"] = {"select"}
+        },
+        j = {
+            name = "jump windows",
+            h = {"<cmd>wincmd h<cr>", "Left"},
+            j = {"<cmd>wincmd j<cr>", "Down"},
+            k = {"<cmd>wincmd k<cr>", "Up"},
+            l = {"<cmd>wincmd l<cr>", "Right"}
+        },
+        T = {
+            name = "tabs",
+            n = {"<cmd>tabnext<cr>", "next"},
+            p = {"<cmd>tabprevious<cr>", "previous"},
+            q = {"<cmd>tabclose<cr>", "quit tab"}
+        },
+        t = {
+            name = "text",
+            [")"] = "wrap with parens",
+            ["}"] = "wrap with braces",
+            ['"'] = "wrap with double quotes",
+            ["'"] = "wrap with single quotes",
+            ["`"] = "wrap with back ticks",
+            u = "lowercase",
+            U = "uppercase"
+        },
+        s = {
+            name = "session",
+            s = {"<cmd>SSave<cr>", "session save"},
+            c = {"<cmd>SClose<cr>", "session close"},
+            d = {"<cmd>SDelete<cr>", "session delete"},
+            l = {"<cmd>SLoad<cr>", "session load"}
+        },
+        o = {
+            name = "open",
+            t = {"<cmd>ToggleTerm<cr>", "terminal"},
+            e = {"<cmd>NvimTreeFindFile<cr>", "find current file"}
+        },
+        p = {
+            name = "plugins",
+            u = {"<cmd>PackerUpdate<cr>", "update"},
+            i = {"<cmd>PackerInstall<cr>", "install"},
+            S = {"<cmd>PackerSync<cr>", "sync"},
+            c = {"<cmd>PackerClean<cr>", "clean"},
+            s = {"<cmd>PackerStatus<cr>", "status"}
+        }
     },
-    g = {
-        name = "git",
-        f = {"<cmd>Telescope git_files<cr>", "Files"},
-        c = {"<cmd>Telescope git_commits<cr>", "Commits"},
-        b = {"<cmd>Telescope git_branches<cr>", "Branches"},
-        s = {"<cmd>Telescope git_status<cr>", "Status"},
-        n = {"<cmd>Gitsigns next_hunk<cr>", "Next Hunk"},
-        p = {"<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk"},
-        v = {"<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk"},
-        r = {"<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk"},
-        R = {"<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer"}
-    },
-    l = {
-        name = "LSP",
-        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
-        A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
-        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
-        D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-        l = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
-        f = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
-        i = {"<cmd>LspInfo<cr>", "LSP Info"},
-        k = {"<cmd>Lspsaga signature_help<cr>", "LSP Signature Help"},
-        h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Document"},
-        F = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
-        p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
-        r = {"<cmd>Lspsaga rename<cr>", "Rename"},
-        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"}
-    },
-    j = {
-        name = "Jump Windows",
-        h = {"<cmd>wincmd h<cr>", "Left"},
-        j = {"<cmd>wincmd j<cr>", "Down"},
-        k = {"<cmd>wincmd k<cr>", "Up"},
-        l = {"<cmd>wincmd l<cr>", "Right"}
-    },
-    t = {
-        name = "Tabs",
-        n = {"<cmd>tabnext<cr>", "Next"},
-        p = {"<cmd>tabprevious<cr>", "Previous"},
-        q = {"<cmd>tabclose<cr>", "Quit Tab"}
-    },
-    s = {
-        name = "Session",
-        s = {"<cmd>SSave<cr>", "Session Save"},
-        c = {"<cmd>SClose<cr>", "Session Close"},
-        d = {"<cmd>SDelete<cr>", "Session Delete"},
-        l = {"<cmd>SLoad<cr>", "Session Load"}
-    },
-    o = {
-        name = "Open",
-        m = "Markdown",
-        mp = {"<cmd>MarkdownPreviewToggle<cr>", "Preview"},
-        ms = {"<cmd>MarkdownPreviewStop<cr>", "Preview Stop"},
-        t = {"<cmd>ToggleTerm<cr>", "Terminal"},
-        e = {"<cmd>NvimTreeFindFile<cr>", "Find Current File"},
-        b = "Bracey Server",
-        bb = {"<cmd>Bracey<cr>", "Start"},
-        bs = {"<cmd>BraceyStop<cr>", "Stop"},
-        br = {"<cmd>BraceyReload<cr>", "Reload"}
-    },
-    p = {
-        name = "Plugins",
-        u = {"<cmd>PackerUpdate<cr>", "Update"},
-        i = {"<cmd>PackerInstall<cr>", "Install"},
-        S = {"<cmd>PackerSync<cr>", "Sync"},
-        c = {"<cmd>PackerClean<cr>", "Clean"},
-        s = {"<cmd>PackerStatus<cr>", "Status"}
+    ["g"] = {
+        ["V"] = "visually select last edited/pasted text",
+        ["d"] = "LSP definition",
+        ["D"] = "LSP declaration",
+        ["r"] = "LSP declaration",
+        ["y"] = "LSP type definition",
+        ["h"] = "LSP doc",
+        ["c"] = "comment text",
+        ["cc"] = "comment line"
     }
 }
 

@@ -2,6 +2,7 @@
 " let g:EasyMotion_do_mapping = 0
 
 " Setting up <Leader> key for easymotion
+" Note: This mapping conflicts with which-key.nvim"
 " map <Leader> <Plug>(easymotion-prefix)
 
 " Jump to anywhere you want with minimal keystrokes, with just one key

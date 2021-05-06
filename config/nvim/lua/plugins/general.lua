@@ -12,6 +12,9 @@ require "toggleterm".setup {
 -- Undotree
 vim.g.undotree_WindowLayout = 3
 
+-- undotree
+vim.g.undotree_WindowLayout = 2
+
 -- Colorizer
 require "colorizer".setup(
     {"*"},

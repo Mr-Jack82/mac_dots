@@ -10,6 +10,7 @@ u.map("n", "'", ",")
 
 -- Basics
 u.map("n", "<leader>w", ":update<CR>")
+u.map("n", "<leader>*", ":wa<CR>")
 u.map("n", "<leader>q", ":bdelete<CR>")
 u.map("n", "Q", "<Nop>")
 u.map("n", "<leader>r", ":luafile %<CR>", {silent = false})
@@ -22,12 +23,41 @@ u.map("n", "<A-t>", ":ToggleTerm<CR>")
 u.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 -- u.map("i", "{<Enter>", "{<Enter>}<Esc>O")
 
---[[ " Making things easier a little bit
- Hacked from Steeve Losh
- https://bitbucket.org/sjl/dotfiles/src/default/vim/vimrc ]]
---[[ u.map("n", "H", "^")
-u.map("n", "L", "$") ]]
-u.map("v", "<S-v>", "g_")
+<<<<<<< HEAD
+-- Remap for dealing with word wrap in Normal mode
+u.map("n", "k", 'v:count == 0 ? "gk" : "k"', {expr = true})
+u.map("n", "j", 'v:count == 0 ? "gj" : "j"', {expr = true})
+-- same for visual mode
+u.map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', {expr = true})
+u.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', {expr = true})
+
+-- Visually select the text that was last edited/pasted
+u.map("n", "gV", "`[v`]", {noremap = false})
+
+-- new files
+u.map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
+u.map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
+u.map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
+
+-- Lsp Stop
+u.map("n", "<leader>l.s", [[:LspStop <C-R>=<CR>]], {silent = false})
+
+-- text
+u.map("n", [[<leader>t"]], [[ciw"<c-r>""<esc>]])
+u.map("n", [[<leader>t`]], [[ciw`<c-r>"`<esc>]])
+u.map("n", [[<leader>t']], [[ciw'<c-r>"'<esc>]])
+u.map("n", [[<leader>t)]], [[ciw(<c-r>")<esc>]])
+u.map("n", [[<leader>t}]], [[ciw{<c-r>"}<esc>]])
+u.map("n", [[<leader>tu]], [[guw]])
+u.map("n", [[<leader>tU]], [[gUw]])
+
+-- Automatically jump to the end of pasted text
+u.map("v", "y", "y`]")
+u.map("v", "p", "p`]")
+u.map("n", "p", "p`]")
+
+-- close all buffers but current
+u.map("n", "<leader>!", [[<cmd>w <bar> %bd <bar> e#<CR>]])
 
 -- Yank to the end of line
 u.map("n", "Y", "y$", {silent = false} )
@@ -89,9 +119,6 @@ u.map("n", "<C-h>", "<C-w>h")
 u.map("n", "<C-j>", "<C-w>j")
 u.map("n", "<C-k>", "<C-w>k")
 u.map("n", "<C-l>", "<C-w>l")
-
--- Check file in shellcheck
-u.map("n", "<leader>x", ":!clear && shellcheck -x %<CR>")
 
 -- Resize windows
 u.map("n", "<S-k>", ":resize -2<CR>")

@@ -13,11 +13,11 @@ vim.api.nvim_exec(
 )
 
 vim.api.nvim_exec(
-    "let startify_bookmarks = [ { 'i': '~/.config/nvim/lua/init.lua' }, {'c': '~/.config/nvim/lua/config.lua'}, { 'p': '~/.config/nvim/lua/plugins.lua' }, { 'z': '~/.config/zsh/.zshrc' }, { 'e': '~/.zshenv' }]",
+    "let startify_bookmarks = [ { 'i': '~/.config/nvim/lua/init.lua' }, {'c': '~/.config/nvim/lua/config.lua'}, { 'p': '~/.config/nvim/lua/plugins.lua' }, { 'z': '~/.config/zsh/.zshrc' }, { 'Z': '~/.zshenv' }]",
     true
 )
 
-vim.g.startify_session_dir = "~/.config/nvim/session"
+vim.g.startify_session_dir = vim.fn.stdpath("data") .. "/startify_session"
 
 -- start Vim in a directory that contains a Session.vim, that session will be loaded automatically
 vim.g.startify_session_autoload = 1
