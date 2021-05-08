@@ -58,7 +58,7 @@ return require("packer").startup(
             "editorconfig/editorconfig-vim",
             "tpope/vim-unimpaired",
             {"lukas-reineke/indent-blankline.nvim", branch = "lua"},
-            "tpope/vim-surround",
+            -- "tpope/vim-surround",
             "tpope/vim-repeat",
 
             -- TODO: I need to choose one
