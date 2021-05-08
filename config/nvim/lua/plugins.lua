@@ -51,6 +51,7 @@ return require("packer").startup(
             "folke/which-key.nvim",
             "windwp/nvim-autopairs",
             "norcalli/nvim-colorizer.lua",
+            "blackCauldron7/surround.nvim",
             "kyazdani42/nvim-web-devicons",
             {"turbio/bracey.vim", run = "npm install --prefix server"},
             "junegunn/vim-easy-align",
@@ -74,6 +75,7 @@ return require("packer").startup(
         -- Themes
         use {
             "rakr/vim-one",
+            "rafamadriz/neon",
             "morhetz/gruvbox",
             {"dracula/vim", as = "dracula"},
             "christianchiarulli/nvcode-color-schemes.vim",

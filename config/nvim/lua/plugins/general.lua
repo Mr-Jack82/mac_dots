@@ -12,6 +12,9 @@ require "toggleterm".setup {
 -- Undotree
 vim.g.undotree_WindowLayout = 3
 
+-- sorround
+require "surround".setup {}
+
 -- undotree
 vim.g.undotree_WindowLayout = 2
 

@@ -13,7 +13,7 @@ u.map("n", "<leader>w", ":update<CR>")
 u.map("n", "<leader>*", ":wa<CR>")
 u.map("n", "<leader>q", ":update | bdelete<CR>")
 u.map("n", "Q", "<Nop>")
-u.map("n", "<leader>r", ":luafile %<CR>", {silent = false})
+u.map("n", "<leader>tS", ":luafile %<CR>", {silent = false})
 
 -- Clean search (highlight)
 u.map("n", "<Esc>", ":nohlsearch<CR>")
