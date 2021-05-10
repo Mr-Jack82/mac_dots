@@ -21,14 +21,8 @@ u.map("n", "<BS>", "<C-^>")
 u.map("t", "<C-o>", [[<C-\><C-n>]])
 u.map("n", "<A-t>", ":ToggleTerm<CR>")
 u.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
+u.map("c", "PU", ":PackerUpdate<CR>", {silent = false})
 -- u.map("i", "{<Enter>", "{<Enter>}<Esc>O")
-
--- Remap for dealing with word wrap in Normal mode
-u.map("n", "k", 'v:count == 0 ? "gk" : "k"', {expr = true})
-u.map("n", "j", 'v:count == 0 ? "gj" : "j"', {expr = true})
--- same for visual mode
-u.map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', {expr = true})
-u.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', {expr = true})
 
 -- Visually select the text that was last edited/pasted
 u.map("n", "gV", "`[v`]", {noremap = false})

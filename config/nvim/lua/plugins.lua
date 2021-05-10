@@ -10,6 +10,7 @@ return require("packer").startup(
             "sbdchd/neoformat",
             "hrsh7th/vim-vsnip",
             "kabouzeid/nvim-lspinstall",
+            "rafamadriz/friendly-snippets"
         }
 
         -- Telescope
@@ -51,14 +52,13 @@ return require("packer").startup(
             "folke/which-key.nvim",
             "windwp/nvim-autopairs",
             "norcalli/nvim-colorizer.lua",
-            "blackCauldron7/surround.nvim",
             "kyazdani42/nvim-web-devicons",
             {"turbio/bracey.vim", run = "npm install --prefix server"},
             "junegunn/vim-easy-align",
             "editorconfig/editorconfig-vim",
             "tpope/vim-unimpaired",
             {"lukas-reineke/indent-blankline.nvim", branch = "lua"},
-            -- "tpope/vim-surround",
+            "tpope/vim-surround",
             "tpope/vim-repeat",
 
             -- TODO: I need to choose one
