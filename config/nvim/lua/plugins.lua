@@ -7,11 +7,11 @@ return require("packer").startup(
             "neovim/nvim-lspconfig",
             "glepnir/lspsaga.nvim",
             "hrsh7th/nvim-compe",
-            "sbdchd/neoformat",
             "hrsh7th/vim-vsnip",
             "kabouzeid/nvim-lspinstall",
             "rafamadriz/friendly-snippets"
         }
+        -- ====================================
 
         -- Telescope
         use {
@@ -22,38 +22,36 @@ return require("packer").startup(
                 {"nvim-telescope/telescope-fzy-native.nvim"}
             }
         }
+        -- ====================================
 
         -- Treesitter
         use {
             {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
             "p00f/nvim-ts-rainbow"
         }
+        -- ====================================
 
-        -- Git
-        use "lewis6991/gitsigns.nvim"
-
-        -- File manager
-        use "kyazdani42/nvim-tree.lua"
-
-        -- Markdown
-        use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
-
-        -- Statusline
-        use "famiu/feline.nvim"
-
-        -- Terminal
-        use "akinsho/nvim-toggleterm.lua"
+        -- Utils
+        use {
+            "mbbill/undotree",
+            "b3nj5m1n/kommentary",
+            "folke/which-key.nvim",
+            "machakann/vim-sandwich",
+            "kyazdani42/nvim-tree.lua",
+            "akinsho/nvim-toggleterm.lua"
+        }
+        -- ====================================
 
         -- General plugins
         use {
-            "mbbill/undotree",
+            "sbdchd/neoformat",
+            "famiu/feline.nvim",
             "mhinz/vim-startify",
-            "b3nj5m1n/kommentary",
-            "folke/which-key.nvim",
             "windwp/nvim-autopairs",
             "norcalli/nvim-colorizer.lua",
             "kyazdani42/nvim-web-devicons",
             {"turbio/bracey.vim", run = "npm install --prefix server"},
+            {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"},
             "junegunn/vim-easy-align",
             "editorconfig/editorconfig-vim",
             "tpope/vim-unimpaired",
@@ -71,6 +69,10 @@ return require("packer").startup(
               ft = {'html', 'javascript', 'json', 'xml'}
             }
         }
+        -- ====================================
+
+        -- Git
+        use "lewis6991/gitsigns.nvim"
 
         -- Themes
         use {
