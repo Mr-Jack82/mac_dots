@@ -23,3 +23,4 @@
     ~/.config/lf:
         path: config/lf/
     ~/.config/alacritty/alacritty.yml: config/alacritty/alacritty.yml
+    ~/.curlrc: curlrc
