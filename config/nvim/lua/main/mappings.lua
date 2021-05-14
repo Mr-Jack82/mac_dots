@@ -24,6 +24,9 @@ u.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 u.map("c", "PU", ":PackerUpdate<CR>", {silent = false})
 -- u.map("i", "{<Enter>", "{<Enter>}<Esc>O")
 
+-- Packer.nvim shortcut to update all plugins
+vim.cmd[[command! PU PackerUpdate]]
+
 -- Visually select the text that was last edited/pasted
 u.map("n", "gV", "`[v`]", {noremap = false})
 
