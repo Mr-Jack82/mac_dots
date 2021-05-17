@@ -5,7 +5,6 @@ return require("packer").startup(
         -- LSP, Autocomplete and snippets
         use {
             "neovim/nvim-lspconfig",
-            "glepnir/lspsaga.nvim",
             "hrsh7th/nvim-compe",
             "hrsh7th/vim-vsnip",
             "kabouzeid/nvim-lspinstall",
@@ -26,8 +25,8 @@ return require("packer").startup(
 
         -- Treesitter
         use {
-            {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
-            "p00f/nvim-ts-rainbow"
+            "nvim-treesitter/nvim-treesitter",
+            run = ":TSUpdate"
         }
         -- ====================================
 
@@ -76,11 +75,11 @@ return require("packer").startup(
 
         -- Themes
         use {
-            "rakr/vim-one",
             "rafamadriz/neon",
+            "rakr/vim-one",
+            "tomasiser/vim-code-dark",
             "morhetz/gruvbox",
             {"dracula/vim", as = "dracula"},
-            "christianchiarulli/nvcode-color-schemes.vim",
             {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
         }
     end
