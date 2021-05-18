@@ -53,10 +53,11 @@ local opts = {
 
 local mappings = {
     ["<leader>"] = {
-        ["."] = {"<cmd>Telescope find_files<cr>", "find file in project"},
+        ["<space>"] = "find file in project",
         ["/"] = {"<cmd>Telescope live_grep<cr>", "search project"},
         ["e"] = "explorer",
         ["u"] = "undotree",
+        h = {name = "help", v = "vim help", m = "man pages"},
         b = {
             name = "buffers",
             h = "no highlight",
@@ -67,10 +68,11 @@ local mappings = {
             Q = "quit all buffers but current",
             ["]"] = "next buffer",
             ["["] = "previous buffer",
-            u = "source file"
+            ["%"] = "source file"
         },
         w = {
             name = "windows",
+            w = "cycle through windows",
             h = "jump to left window",
             j = "jump to the down window",
             k = "jump to the up window",
@@ -95,13 +97,13 @@ local mappings = {
             t = "theme",
             f = "file",
             g = "grep text",
-            v = "vim tags",
             n = "nvim dotfiles",
             r = "recent files"
         },
         n = {
             name = "new",
             f = "new file",
+            b = "new buffer",
             s = "new file in a split",
             t = "new file in tab"
         },
@@ -124,17 +126,6 @@ local mappings = {
         },
         l = {
             name = "LSP",
-            a = {"code action"},
-            A = {"range code action"},
-            d = {"document diagnostics"},
-            D = {"workspace diagnostics"},
-            l = {"line diagnostics"},
-            i = {"LSP info"},
-            h = {"<cmd>lua vim.lsp.buf.hover()<cr>", "hover document"},
-            F = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "format"},
-            r = {"rename"},
-            s = {"document symbols"},
-            S = {"workspace symbols"},
             ["'"] = "LSP start",
             ["'t"] = {"<cmd>LspStart TsServer<cr>", "javascript, typescript"},
             ["'e"] = {"<cmd>LspStart emmet_ls<cr>", "emmet"},
@@ -145,23 +136,15 @@ local mappings = {
             ["'p"] = {"<cmd>LspStart pyright<cr>", "python"},
             ["'L"] = {"<cmd>LspStart texlab<cr>", "latex"},
             ["'h"] = {"<cmd>LspStart html<cr>", "HTML"},
-            ["'C"] = {"<cmd>LspStart cssls<cr>", "CSS"},
-            ["."] = {"LSP stop"},
-            [".a"] = {"<cmd>LspStop<cr>", "stop all"},
-            [".s"] = {"select"}
-        },
-        T = {
-            name = "tabs",
-            ["]"] = {"<cmd>tabnext<cr>", "next"},
-            ["["] = {"<cmd>tabprevious<cr>", "previous"},
-            q = {"<cmd>tabclose<cr>", "quit tab"}
+            ["'C"] = {"<cmd>LspStart cssls<cr>", "CSS"}
         },
         s = {
             name = "session",
             s = {"<cmd>SSave<cr>", "session save"},
             c = {"<cmd>SClose<cr>", "session close"},
             d = {"<cmd>SDelete<cr>", "session delete"},
-            l = {"<cmd>SLoad<cr>", "session load"}
+            l = {"<cmd>SLoad<cr>", "session load"},
+            r = {"<cmd>lua require('utils.reload').Reload()<cr>", "session reload"}
         },
         o = {
             name = "open",
@@ -181,12 +164,6 @@ local mappings = {
     },
     ["g"] = {
         ["V"] = "visually select last edited/pasted text",
-        ["d"] = "LSP definition",
-        ["D"] = "LSP declaration",
-        ["K"] = "LSP signature help",
-        ["r"] = "LSP declaration",
-        ["y"] = "LSP type definition",
-        ["h"] = "LSP doc",
         ["c"] = "comment text",
         ["cc"] = "comment line"
     },

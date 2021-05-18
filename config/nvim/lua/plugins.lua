@@ -24,10 +24,7 @@ return require("packer").startup(
         -- ====================================
 
         -- Treesitter
-        use {
-            "nvim-treesitter/nvim-treesitter",
-            run = ":TSUpdate"
-        }
+        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         -- ====================================
 
         -- Utils
@@ -71,7 +68,7 @@ return require("packer").startup(
         -- ====================================
 
         -- Git
-        use "lewis6991/gitsigns.nvim"
+        use {"lewis6991/gitsigns.nvim", "tpope/vim-fugitive"}
 
         -- Themes
         use {
