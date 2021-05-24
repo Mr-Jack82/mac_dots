@@ -335,3 +335,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Enable 'Z' to move faster through dir
 . /opt/homebrew/etc/profile.d/z.sh
+
+alias luamake=/Users/leeroy/.cache/nvim/nlua/sumneko_lua/3rd/luamake/luamake
