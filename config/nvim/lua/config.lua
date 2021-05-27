@@ -1,54 +1,58 @@
 Opts = {
-    preserve_cursor = true,
-    highlight_yank = true,
-    relativenumber = true,
-    cursorline = true,
-    listchars = true,
-    wrap = false,
-    timeoutlen = 500,
+    timeoutlen = 400,
+    cmdheight = 2,
     updatetime = 300,
     scrolloff = 10,
+    relativenumber = true,
+    cursorline = true,
+    word_wrap = false,
+    preserve_cursor = true,
+    highlight_yank = true,
+    listchars = false,
+    indent_guides = true,
+    explorer_side = "left"
 }
 
 Theming = {
-    -- Press <space>fc to see all available themes
+    -- Press <space>ft to see all available themes
     colorscheme = "neon",
     --[[ Some colorscheme have multiple styles to choose from:
       @gruvbox = medium, soft, hard.
       @neon = default, dark, light.]]
-    colorscheme_style = "",
-    -- Options: classic, slant, minimal, vscode, default
+    colorscheme_style = "doom",
+    -- Options: classic, arrow, slant
     statusline = "classic",
-    -- Options: gruvbox, nord, dark
-    statusline_color = "nord"
+    -- Options: nord, neon, gruvbox, wombat
+    statusline_color = "neon"
 }
 
 LSP = {
     -- @values: true, false
     enabled = true,
     virtual_text = false,
-    highlight_word = true,
-    ---------------
-    -- Autostart --
-    ---------------
-    bash = true,
-    clangd = true,
-    json = true,
-    latex = true,
-    lua = false,
-    python = true,
-    -- WebDev
-    html = true,
-    css = true,
-    tsserver = true,
-    emmet = true
+    document_highlight = false,
+    diagnostic_signs = true,
+    diagnostic_underline = true,
+    autostart = {
+        bash = false,
+        clangd = true,
+        json = false,
+        latex = true,
+        lua = false,
+        python = true,
+        -- WebDev
+        html = true,
+        css = true,
+        tsserver = true,
+        emmet = true
+    }
 }
 
 Completion = {
     -- @values: true, false
     enabled = true,
     autopairs = true,
-    items = 10,
+    items = 8,
     ---------------------------
     -- Sources of Completion --
     ---------------------------
@@ -65,7 +69,7 @@ Formatting = {
     -- if format_on_save is enable it will always trim trailing white spaces
     format_on_save = true,
     trim_trailing_space = true,
-    indent_size = 2
+    indent_size = 4
 }
 
 Treesitter = {

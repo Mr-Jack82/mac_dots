@@ -1,64 +1,63 @@
-local nvim_lsp = require "lspconfig"
-local capabilities = require "utils.lsp".capabilities
-local common_on_attach = require "utils.lsp".common_on_attach
-local cmds = require "utils.lsp".cmds
+local lsp = require "lspconfig"
+local capabilities = require "lsp.config".capabilities
+local common_on_attach = require "lsp.config".common_on_attach
+local cmds = require "lsp.config".cmds
 
 -- npm i -g bash-language-server
-nvim_lsp.bashls.setup {
+lsp.bashls.setup {
     cmd = cmds.bash,
-    autostart = LSP.bash,
+    autostart = as._lsp_auto("bash"),
     on_attach = common_on_attach,
     filetypes = {"sh", "zsh"}
 }
 
 -- npm i -g pyright
-nvim_lsp.pyright.setup {
+lsp.pyright.setup {
     cmd = cmds.python,
-    autostart = LSP.python,
+    autostart = as._lsp_auto("python"),
     on_attach = common_on_attach
 }
 
 -- npm i -g vscode-json-languageserver
-nvim_lsp.jsonls.setup {
-    cmd = cmds.python,
-    autostart = LSP.json,
+lsp.jsonls.setup {
+    cmd = cmds.json,
+    autostart = as._lsp_auto("json"),
     on_attach = common_on_attach
 }
 
 -- pacman -S clang
-nvim_lsp.clangd.setup {
+lsp.clangd.setup {
     cmd = cmds.clangd,
-    autostart = LSP.clangd,
+    autostart = as._lsp_auto("clangd"),
     on_attach = common_on_attach
 }
 
 -- npm i -g typescript typescript-language-server
-nvim_lsp.tsserver.setup {
+lsp.tsserver.setup {
     cmd = cmds.tsserver,
-    autostart = LSP.tsserver,
+    autostart = as._lsp_auto("tsserver"),
     on_attach = common_on_attach,
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"}
 }
 
 -- npm i -g vscode-html-languageserver-bin
-nvim_lsp.html.setup {
+lsp.html.setup {
     cmd = cmds.html,
-    autostart = LSP.html,
+    autostart = as._lsp_auto("html"),
     on_attach = common_on_attach,
     capabilities = capabilities
 }
 
 -- npm i -g vscode-css-languageserver-bin
-nvim_lsp.cssls.setup {
+lsp.cssls.setup {
     cmd = cmds.css,
-    autostart = LSP.css,
+    autostart = as._lsp_auto("css"),
     on_attach = common_on_attach
 }
-
-nvim_lsp.texlab.setup {
+lsp.texlab.setup {
     cmd = cmds.texlab,
     on_attach = common_on_attach,
-    autostart = LSP.latex
+    autostart = as._lsp_auto("latex")
 }
 
 -- npm i -g emmet-ls
@@ -73,7 +72,7 @@ configs.emmet_ls = {
         settings = {}
     }
 }
-nvim_lsp.emmet_ls.setup {autostart = LSP.emmet}
+lsp.emmet_ls.setup {autostart = as._lsp_auto("emmet")}
 
 -- lua  https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 -- install instructions:
@@ -88,9 +87,13 @@ nvim_lsp.emmet_ls.setup {autostart = LSP.emmet}
 local luapath = vim.fn.stdpath("data") .. "/lspinstall/lua"
 local luabin = luapath .. "/sumneko-lua-language-server"
 
-nvim_lsp.sumneko_lua.setup {
+local path = vim.split(package.path, ";")
+-- this is the ONLY correct way to setup your path
+table.insert(path, "lua/?.lua")
+table.insert(path, "lua/?/init.lua")
+lsp.sumneko_lua.setup {
     cmd = {luabin, "-E", luapath .. "/main.lua"},
-    autostart = LSP.lua,
+    autostart = as._lsp_auto("lua"),
     on_attach = common_on_attach,
     settings = {
         Lua = {
@@ -98,11 +101,23 @@ nvim_lsp.sumneko_lua.setup {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
                 -- Setup your lua path
-                path = vim.split(package.path, ";")
+                path = path
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {"vim", "use", "run", "Theming", "LSP", "Completion", "Opts", "Formatting", "Treesitter"}
+                globals = {
+                    "vim",
+                    "as",
+                    "DATA_PATH",
+                    "use",
+                    "run",
+                    "Theming",
+                    "LSP",
+                    "Completion",
+                    "Opts",
+                    "Formatting",
+                    "Treesitter"
+                }
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
@@ -110,7 +125,8 @@ nvim_lsp.sumneko_lua.setup {
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                     [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
                 },
-                maxPreload = 10000
+                maxPreload = 10000,
+                preloadFileSize = 50000
             },
             telemetry = {
                 enable = false

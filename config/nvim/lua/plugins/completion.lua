@@ -1,57 +1,3 @@
-require "compe".setup {
-    enabled = Completion.enabled,
-    autocomplete = true,
-    debug = false,
-    min_length = 2,
-    preselect = "always",
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-    source = {
-        path = Completion.path,
-        buffer = Completion.buffer,
-        calc = Completion.calc,
-        vsnip = Completion.snippets,
-        nvim_lsp = Completion.lsp,
-        spell = Completion.spell,
-        emoji = Completion.emoji,
-        nvim_lua = {menu = "[]"}
-    }
-}
-
--- symbols for autocomplete
-vim.lsp.protocol.CompletionItemKind = {
-    "   (Text) ",
-    "   (Method)",
-    "   (Function)",
-    "   (Constructor)",
-    " ﴲ  (Field)",
-    "[] (Variable)",
-    "   (Class)",
-    " ﰮ  (Interface)",
-    "   (Module)",
-    " 襁 (Property)",
-    "   (Unit)",
-    "   (Value)",
-    " 練 (Enum)",
-    "   (Keyword)",
-    " ﬌  (Snippet)",
-    "   (Color)",
-    "   (File)",
-    "   (Reference)",
-    "   (Folder)",
-    "   (EnumMember)",
-    " ﲀ  (Constant)",
-    " ﳤ  (Struct)",
-    "   (Event)",
-    "   (Operator)",
-    "   (TypeParameter)"
-}
-
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -91,9 +37,37 @@ end
 
 local map = vim.api.nvim_set_keymap
 
+map("i", "<C-e>", "compe#close('<C-e>')", {expr = true})
 map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 map("i", "<C-l>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l>']], {expr = true})
 map("s", "<C-l>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l>']], {expr = true})
+
+-- Autopairs
+if as._default(Completion.autopairs) == true then
+    vim.cmd [[packadd nvim-autopairs]]
+    require("nvim-autopairs").setup()
+
+    local remap = vim.api.nvim_set_keymap
+    local npairs = require("nvim-autopairs")
+
+    -- skip it, if you use another global object
+    _G.MUtils = {}
+
+    vim.g.completion_confirm_key = ""
+    MUtils.completion_confirm = function()
+        if vim.fn.pumvisible() ~= 0 then
+            if vim.fn.complete_info()["selected"] ~= -1 then
+                return vim.fn["compe#confirm"](npairs.esc("<c-r>"))
+            else
+                return npairs.esc("<cr>")
+            end
+        else
+            return npairs.autopairs_cr()
+        end
+    end
+
+    remap("i", "<CR>", "v:lua.MUtils.completion_confirm()", {expr = true, noremap = true})
+end

@@ -1,66 +1,33 @@
-local u = require("utils.core")
+local nvim_set_au = as.nvim_set_au
 
-local autocmds = {
-    filetypes = {
-        {"BufNewFile,BufRead", "*.ejs", "set filetype=html"},
-        {"FileType", "markdown", "setlocal wrap spell"},
-        {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
-        {"FileType", "toggleterm", "setlocal nonumber norelativenumber"}
-    },
-    terminal = {
-        {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
-        {"TermOpen", "*", "set nonu"}
-    }
-}
-vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
-
--- define tables to insert
-local hl_yank = {
-    {"TextYankPost", "*", 'lua require"vim.highlight".on_yank()'}
-}
-
-local preserve_cursor = {
-    {"BufReadPost", "*", [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]}
-}
-
-local format = {
-    {
-        "BufWritePre",
-        "*",
-        [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
-    }
-}
-
-local trim_whitespaces = {
-    {"BufWritePre", "*", [[%s/\s\+$//e]]},
-    {"BufWritePre", "*", [[%s/\n\+\%$//e]]}
-    -- {"BufWritePre", "*.[ch]", [[*.[ch] %s/\%$/\r/e]]}
-}
-
--- Remap escape to leave terminal mode
-vim.api.nvim_exec([[
-  augroup Terminal
-    autocmd!
-    au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-    au TermOpen * set nonu
-  augroup end
-]], false)
-
--- insert tables if true or nil
-if Opts.preserve_cursor == true or Opts.preserve_cursor == nil then
-    table.insert(autocmds, preserve_cursor)
+-- check if option to set autocommand
+local function check_and_set(option, au_type, where, dispatch, boolean)
+    if as._default(option, boolean) == true then
+        nvim_set_au(au_type, where, dispatch)
+    end
 end
 
-if Opts.highlight_yank == true or Opts.highlight_yank == nil then
-    table.insert(autocmds, hl_yank)
-end
+nvim_set_au("ColorScheme", "*", [[lua require("lsp.config").fix("ColorScheme")]])
+nvim_set_au("BufWritePost", "pack.lua", "PackerCompile")
+nvim_set_au("BufNewFile,BufRead", "*.ejs", "set filetype=html")
+nvim_set_au("FileType", "markdown", "setlocal wrap spell")
+nvim_set_au("FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
+nvim_set_au("FileType", "toggleterm", "setlocal nonumber norelativenumber")
+nvim_set_au("TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]])
+nvim_set_au("TermOpen", "*", "set nonu")
 
-if Formatting.format_on_save == true or Formatting.format_on_save == nil then
-    table.insert(autocmds, format)
-end
-
-if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space == nil then
-    table.insert(autocmds, trim_whitespaces)
-end
-
-u.define_augroups(autocmds)
+check_and_set(Opts.highlight_yank, "TextYankPost", "*", 'lua require"vim.highlight".on_yank()')
+check_and_set(Formatting.trim_trailing_space, "BufWritePre", "*", [[%s/\s\+$//e]])
+check_and_set(Formatting.trim_trailing_space, "BufWritePre", "*", [[%s/\n\+\%$//e]])
+check_and_set(
+    Opts.preserve_cursor,
+    "BufReadPost",
+    "*",
+    [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
+)
+check_and_set(
+    Formatting.format_on_save,
+    "BufWritePre",
+    "*",
+    [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
+)

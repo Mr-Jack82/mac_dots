@@ -21,6 +21,13 @@ require("which-key").setup {
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
     operators = {gc = "Comments"},
+    key_labels = {
+        -- override the label used to display some keys. It doesn't effect WK in any other way.
+        -- For example:
+        ["<space>"] = "SPC",
+        ["<cr>"] = "RET",
+        ["<tab>"] = "TAB"
+    },
     icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
@@ -92,7 +99,8 @@ local mappings = {
         f = {
             name = "find",
             b = "buffer fuzzy finder",
-            c = "command history",
+            C = "command history",
+            C = "commands",
             s = "search history",
             t = "theme",
             f = "file",
@@ -111,23 +119,31 @@ local mappings = {
             name = "git",
             ["]"] = "next hunk",
             ["["] = "previous hunk",
+            a = "add current file",
+            d = "diff show",
+            C = "commit changes",
+            i = "init",
+            l = "log",
             b = "branches",
             c = "commits",
             f = "files",
             s = "status",
             p = "preview hunk",
-            l = "line blame",
+            L = "line blame",
+            B = "blame sidebar",
             r = "reset hunk",
             R = "reset buffer",
             I = "reset buffer index",
             t = "stage hunk",
             T = "stage buffer",
-            u = "undo last stage hunk"
+            u = "undo last stage hunk",
+            P = "push"
         },
         l = {
             name = "LSP",
+            i = {"<cmd>LspInfo<cr>", "LSP info"},
             ["'"] = "LSP start",
-            ["'t"] = {"<cmd>LspStart TsServer<cr>", "javascript, typescript"},
+            ["'t"] = {"<cmd>LspStart tsserver<cr>", "javascript, typescript"},
             ["'e"] = {"<cmd>LspStart emmet_ls<cr>", "emmet"},
             ["'b"] = {"<cmd>LspStart bashls<cr>", "bash"},
             ["'l"] = {"<cmd>LspStart sumneko_lua<cr>", "lua"},
@@ -144,14 +160,16 @@ local mappings = {
             c = {"<cmd>SClose<cr>", "session close"},
             d = {"<cmd>SDelete<cr>", "session delete"},
             l = {"<cmd>SLoad<cr>", "session load"},
-            r = {"<cmd>lua require('utils.reload').Reload()<cr>", "session reload"}
+            r = {"<cmd>lua require('utils.extra').Reload()<cr>", "session reload"}
         },
         o = {
             name = "open",
+            H = {"<cmd>Startify<cr>", "Home"},
             t = {"<cmd>ToggleTerm<cr>", "terminal"},
             f = {"<cmd>NvimTreeFindFile<cr>", "find current file"},
             e = {"<cmd>NvimTreetoggle<cr>", "explorer"},
-            u = {"<cmd>UndotreeToggle<cr>", "undotree"}
+            u = {"<cmd>UndotreeToggle<cr>", "undotree"},
+            c = {"<cmd>vsp ~/.config/nvim/lua/config.lua<cr>", "neovim config"}
         },
         p = {
             name = "plugins",
@@ -159,21 +177,30 @@ local mappings = {
             i = {"<cmd>PackerInstall<cr>", "install"},
             S = {"<cmd>PackerSync<cr>", "sync"},
             c = {"<cmd>PackerClean<cr>", "clean"},
+            C = {"<cmd>PackerCompile<cr>", "compile"},
             s = {"<cmd>PackerStatus<cr>", "status"}
+        },
+        z = {
+            name = "zen mode",
+            f = "focus",
+            c = "centered",
+            m = "minimalist",
+            a = "ataraxis",
+            q = {"<cmd>close<cr>", "quit zen mode"}
         }
     },
     ["g"] = {
-        ["V"] = "visually select last edited/pasted text",
+        ["p"] = "select last pasted text",
         ["c"] = "comment text",
         ["cc"] = "comment line"
     },
-    ["s"] = {
+    --[[ ["s"] = {
         a = "add surrounding",
         d = "delete surrounding",
         db = "automatically seearch and delete",
         r = "replace surrounding",
         rb = "automatically search and select to replace"
-    }
+    } ]]
 }
 
 local wk = require("which-key")
