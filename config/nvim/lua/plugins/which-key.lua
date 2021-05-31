@@ -61,7 +61,7 @@ local opts = {
 local mappings = {
     ["<leader>"] = {
         ["<space>"] = "find file in project",
-        ["/"] = {"<cmd>Telescope live_grep<cr>", "search project"},
+        ["/"] = {"<cmd>Telescope live_grep theme=get_ivy<cr>", "search project"},
         ["e"] = "explorer",
         ["u"] = "undotree",
         h = {name = "help", v = "vim help", m = "man pages"},
@@ -119,6 +119,7 @@ local mappings = {
             name = "git",
             ["]"] = "next hunk",
             ["["] = "previous hunk",
+            g = "Git",
             a = "add current file",
             d = "diff show",
             C = "commit changes",
@@ -142,17 +143,7 @@ local mappings = {
         l = {
             name = "LSP",
             i = {"<cmd>LspInfo<cr>", "LSP info"},
-            ["'"] = "LSP start",
-            ["'t"] = {"<cmd>LspStart typescript<cr>", "javascript, typescript"},
-            ["'e"] = {"<cmd>LspStart emmet_ls<cr>", "emmet"},
-            ["'b"] = {"<cmd>LspStart bash<cr>", "bash"},
-            ["'l"] = {"<cmd>LspStart lua<cr>", "lua"},
-            ["'c"] = {"<cmd>LspStart cpp<cr>", "C/C++"},
-            ["'j"] = {"<cmd>LspStart json<cr>", "json"},
-            ["'p"] = {"<cmd>LspStart python<cr>", "python"},
-            ["'L"] = {"<cmd>LspStart latex<cr>", "latex"},
-            ["'h"] = {"<cmd>LspStart html<cr>", "HTML"},
-            ["'C"] = {"<cmd>LspStart css<cr>", "CSS"}
+            ["'"] = {"<cmd>LspStart<cr>", "LSP start"}
         },
         s = {
             name = "session",

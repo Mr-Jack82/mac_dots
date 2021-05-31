@@ -1,6 +1,9 @@
 -- NOTE: in telescope use <C-q> to send all results to quickfix
 -- and <M-q> | <A-q> to send selected items
 
+-- NOTE: you can use a regex pattern as part of a range in command mode, E.g.
+-- :3,/stop/s/hello/world/g
+
 -- Set mapleader to comma ','
 vim.g.mapleader = ","
 
@@ -13,6 +16,7 @@ as.map("n", "Y", "y$")
 as.map("t", "<C-o>", [[<C-\><C-n>]])
 as.map("n", "<A-t>", ":ToggleTerm<CR>")
 as.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
+as.map("n", "0", "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", {expr = true})
 
 -- Move selected line / block of text in visual mode
 as.map("x", "K", ":move '<-2<CR>gv=gv")
@@ -117,12 +121,13 @@ as.map("n", "<S-TAB>", ":bprevious<CR>")
 -- buffers
 as.map("n", "<leader>bb", ":Telescope buffers<CR>") -- all buffers
 as.map("n", "<leader>bs", ":update<CR>") -- save buffer
-as.map("n", "<leader>bS", ":wa<CR>") -- save all buffers
+as.map("n", "<leader>bS", ":silent! wa<CR>") -- save all buffers
 as.map("n", "<leader>bq", ":update | bdelete<CR>") -- quit buffer
 as.map("n", "<leader>bQ", [[<cmd>w <bar> %bd <bar> e#<CR>]]) -- quit all buffers but current
 as.map("n", "<leader>b%", ":luafile %<CR>", {silent = false}) -- source buffer
 as.map("n", "<leader>b]", ":bnext<CR>") -- buffer next
 as.map("n", "<leader>b[", ":bprevious<CR>") -- buffer previous
+as.map("n", "<Esc>", ":nohlsearch<CR>") -- No highlight
 
 -- windows
 as.map("n", "<leader>ww", "<C-w>q") -- cycle through window
@@ -144,6 +149,7 @@ as.map("n", "<leader>w+", ":resize +15<CR>") -- increase height
 
 -- Git
 as.map("n", "<F5>", ":lua require('utils.extra').lazygit_toggle()<CR>") -- lazygit
+as.map("n", "<leader>gg", ":Git<CR>") -- Git
 as.map("n", "<leader>ga", ":Git add %<CR>") -- add current file
 as.map("n", "<leader>gd", ":Git diff %<CR>") -- show diff
 as.map("n", "<leader>gC", ":Git commit %<CR>") -- commit
@@ -170,8 +176,8 @@ as.map("n", "<leader>g]", ":Gitsigns next_hunk<CR>") -- next hunk
 as.map("n", "<leader><space>", ":Telescope find_files<CR>")
 as.map("n", "<leader>ff", ":Telescope find_files<CR>")
 as.map("n", "<leader>fr", ":Telescope oldfiles<CR>")
-as.map("n", "<leader>fg", ":Telescope live_grep<CR>")
-as.map("n", "<leader>fb", ":Telescope current_buffer_fuzzy_find<CR>")
+as.map("n", "<leader>fg", ":Telescope live_grep theme=get_ivy<CR>")
+as.map("n", "<leader>fb", ":Telescope current_buffer_fuzzy_find theme=get_ivy<CR>")
 as.map("n", "<leader>ft", ":Telescope colorscheme<CR>")
 as.map("n", "<leader>fC", ":Telescope command_history<CR>")
 as.map("n", "<leader>fc", ":Telescope commands<CR>")
