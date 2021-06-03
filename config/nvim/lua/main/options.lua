@@ -49,23 +49,18 @@ as.opt("b", "fileencoding", "utf-8")
 as.opt("b", "syntax", "on")
 as.opt("b", "textwidth", 80)
 
--- Commands
-local cmd = vim.cmd
-cmd("set shortmess+=c")
-cmd("set iskeyword+=-")
-cmd("set path+=.,**")
-cmd("filetype plugin on")
-cmd("set list")
-cmd("set listchars+=trail:•")
+-- others
+local opt = vim.opt
+opt.shortmess:append("c")
+opt.iskeyword:append("-")
+opt.path:append(".,**")
+opt.list = true
+opt.listchars = {trail = "•"}
+vim.cmd("filetype plugin on")
 -- listchars
 if as._default(vim.g.neon_listchars, false) == true then
-    cmd("set listchars=eol:↴")
-    cmd("set listchars+=tab:│⋅")
-    cmd("set listchars+=extends:❯")
-    cmd("set listchars+=precedes:❮")
-    cmd("set listchars+=nbsp:_")
-    cmd("set listchars+=space:⋅")
-    cmd("set showbreak=↳⋅")
+    opt.listchars = {eol = "↴", tab = "│⋅", extends = "❯", precedes = "❮", nbsp = "_", space = "⋅"}
+    opt.showbreak = "↳⋅"
 end
 
 -- Fix spelling errors
