@@ -73,3 +73,5 @@
 	diffFilter = diff-so-fancy --patch
 [diff-so-fancy]
 	changeHunkIndicators = false
+[rerere]
+	enabled = true
