@@ -1,4 +1,4 @@
-[use]
+[user]
 	name = Vitaly
 	email = blackjack358@gmail.com
 [core]
@@ -61,9 +61,6 @@
 	trustExitCode = true
 [commit]
 	template = /Users/leeroy/.stCommitMsg
-[user]
-	email = blackjack358@gmail.com
-	name = Виталий Шевченко
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
