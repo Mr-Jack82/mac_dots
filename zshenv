@@ -1,8 +1,12 @@
 source "$HOME/.cargo/env"
 
 # bat as pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export PAGER="bat --paging=always"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export PAGER="bat --paging=always"
+# export MANROFFOPT="-c"
+
+# less as manpager
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 # icons for lf file manager
 export LF_ICONS="\
