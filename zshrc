@@ -130,9 +130,9 @@ alias l='colorls --group-directories-first --almost-all'
 alias ll='colorls --group-directories-first --almost-all --long'
 alias cf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ldir='ls -d */'
-alias weather="http http://wttr.in/Temruk"
+alias weather='http http://wttr.in/Temruk'
 alias cp='cp -iv'
-alias v=nvim
+alias v='nvim'
 
 # User configuration
 
@@ -141,7 +141,8 @@ alias v=nvim
 source $ZSH/oh-my-zsh.sh
 
 export LESS='-R'
-export LESSOPEN='|~/.lessfilter %s'
+# export LESSOPEN='|~/.lessfilter %s'
+export LESSOPEN='| /opt/homebrew/Cellar/source-highlight/3.1.9_5/bin/source-highlight-esc.sh %s'
 
 LC_ALL=ru_RU.UTF-8
 export LC_ALL
