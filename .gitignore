@@ -1,3 +1,4 @@
 plugged/
 autoload/
 packer_compiled.vim
+config/nvim/
