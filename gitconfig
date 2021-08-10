@@ -11,27 +11,27 @@
 [merge]
 	tool = vimdiff
 [mergetool "fugutive"]
-    cmd = vim -f -c \"Gdiff\" \"$MERGED\"
-    keepBackup = false
+        cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+        keepBackup = false
 [color]
 	ui = true
 [alias]
-    co = checkout
-    cb = checkout -b
-    di = diff
-    dc = diff --cached
-    aa = add --all
-    ff = merge --ff-only
-    pullff = pull --ff-only
-    noff = merge --no-ff
-    pom = push origin master
-    ci = commit
-    st = status
-    br = branch
-    hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	lg = log --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
-    type = cat-file -t
-    dump = cat-file -p
+        co = checkout
+        cb = checkout -b
+        di = diff
+        dc = diff --cached
+        aa = add --all
+        ff = merge --ff-only
+        pullff = pull --ff-only
+        noff = merge --no-ff
+        pom = push origin master
+        ci = commit
+        st = status
+        br = branch
+        hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+        lg = log --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
+        type = cat-file -t
+        dump = cat-file -p
 	commend = commit --amend --no-edit  # sticks all indexed files to latest commit
 	please = push --force-with-lease    # check a local copy before rewrite
 	stsh = stash --keep-index           # stash only unstaged changes to tracked files
