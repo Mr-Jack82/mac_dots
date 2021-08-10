@@ -6,3 +6,4 @@
 	path = config/nvim
 	url = https://github.com/Mr-Jack82/NeonVim.git
 	branch = mine
+	ignore = dirty
