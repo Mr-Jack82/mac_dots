@@ -249,7 +249,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-o)
-fo() {
+fio() {
     local files
     IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
     [[ -n "$files" ]] && ${EDITOR: -vim} "${files[@]}"
@@ -302,6 +302,16 @@ fgr() {
     then
         vim $file +$line
     fi
+}
+
+# [f]uzzy check[o]ut
+fo() {
+  git branch --no-color --sort=-committerdate --format='%(refname:short)' | fzf --header 'git checkout' | xargs git checkout
+}
+
+# [p]ull request check[o]ut
+po() {
+  gh pr list --author "@me" | fzf --header 'checkout PR' | awk '{print $(NF-1)}' | xargs git checkout
 }
 
 # Prevent Neovim from nesting inside of the Terminal buffer
