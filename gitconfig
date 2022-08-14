@@ -7,7 +7,7 @@
 	safecrlf = true
 	quotepath = off
 	pager = diff-so-fancy | less --tabs=2 -RFX
-	excludesfile = /Users/leeroy/.gitignore_global
+	excludesFile = /Users/leeroy/.gitignore
 [merge]
 	tool = vimdiff
 [mergetool "fugutive"]
