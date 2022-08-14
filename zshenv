@@ -6,7 +6,7 @@ source "$HOME/.cargo/env"
 # export MANROFFOPT="-c"
 
 # less as manpager
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 # icons for lf file manager
 export LF_ICONS="\
