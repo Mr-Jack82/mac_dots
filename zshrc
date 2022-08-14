@@ -137,18 +137,6 @@ plugins=(git
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 
-alias cdi='cd `ls | peco`'
-alias rm='rm -i'
-alias grep='grep --color=auto'
-alias l.='ls -d .* --color=tty'
-alias l='colorls --group-directories-first --almost-all'
-alias ll='colorls --group-directories-first --almost-all --long'
-alias cf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias ldir='ls -d */'
-alias weather='http http://wttr.in/Temruk'
-alias cp='cp -iv'
-alias v='nvim'
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -183,6 +171,19 @@ export LC_ALL
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias cdi='cd `ls | peco`'
+alias rm='rm -i'
+alias grep='grep --color=auto'
+alias l.='ls -d .* --color=tty'
+alias l='colorls --group-directories-first --almost-all'
+alias ll='colorls --group-directories-first --almost-all --long'
+alias cf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias ldir='ls -d */'
+alias weather='http http://wttr.in/Temruk'
+alias cp='cp -iv'
+alias n='nvim'
+alias v='vim'
 
 #Enable Vi mode
 #bindkey -v
