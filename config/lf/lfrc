@@ -17,7 +17,6 @@ set shellopts '-eu:--shwordsplit'
 # commands accordingly.
 set ifs "\n"
 
-
 set scrolloff 10
 set icons
 set drawbox
@@ -50,6 +49,34 @@ cmd zi ${{
 
 cmd za %zoxide add "$@"
 cmd zr %zoxide remove "$@"
+
+# Bindings
+# Remove some defaults
+map m
+map o
+map n
+map "'"
+map '"'
+map d
+map c
+map e
+map f
+
+# create directory
+cmd mkdir %{{
+        IFS=" "
+        mkdir -p -- "$*"
+        lf -remote "send $id select \"$*\""
+    }}
+map a push :mkdir<space>
+
+# create file
+cmd mkfile ${{
+        printf "File Name: "
+        read ans
+        $EDITOR $ans
+    }}
+map mf mkfile
 
 # konsole wrapper
 cmd tabnew &konsole --new-tab -e lf $PWD
