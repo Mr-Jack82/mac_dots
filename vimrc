@@ -100,7 +100,7 @@ Plug 'romainl/vim-cool'
 
 " Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'mhartington/oceanic-next'
 
 " Status line
