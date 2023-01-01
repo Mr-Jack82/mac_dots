@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
 " Minimalist Vim Plugin Manager
 Plug 'junegunn/vim-plug'
 
-" ===[ Editing Plugins ]=== "
+" === Editing Plugins === "
 
 " Automatically save changes to disk in Vim
 Plug '907th/vim-auto-save'
@@ -38,7 +38,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-easy-align'
 
 " auto-close plugin
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 
 " Easy text exchange operator for Vim
 Plug 'tommcdo/vim-exchange'
@@ -49,7 +49,7 @@ Plug 'andymass/vim-matchup', { 'for':
     \  ['dart', 'eruby', 'html', 'javascript', 'json', 'xml']
     \}
 
-" ===[ Code completion, snippet engine ]=== "
+" === Code completion, snippets === "
 
 " Nodejs extension host for vim & neovim, load extensions like VSCode and host
 " language servers.
@@ -69,7 +69,7 @@ Plug 'Shougo/neosnippet-snippets'
 " Note: this plugin conflicts with 'vim-auto-save'
 Plug 'editorconfig/editorconfig-vim'
 
-" ===[ Seaching and Moving ]=== "
+" === Seaching and Moving === "
 
 " fzf ♡ vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -93,7 +93,10 @@ Plug 'ap/vim-css-color'
 " Make the yanked region apparent!
 Plug 'machakann/vim-highlightedyank'
 
-" ===[ UI ]=== "
+" A very simple plugin that makes hlsearch more useful
+Plug 'romainl/vim-cool'
+
+" === UI === "
 
 " Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -101,8 +104,12 @@ Plug 'morhetz/gruvbox'
 Plug 'mhartington/oceanic-next'
 
 " Status line
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Icons
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Initialize plugin system
 call plug#end()
@@ -121,16 +128,6 @@ endif
 " Enables 24-bit RGB color in the TUI
 set laststatus=2
 syntax on
-
-" Enable true color support
-" for more details see :h xterm-true-color
-" NOTE: the "^[" is a single character. To insert it, press
-" "Ctrl-v" and then "Esc" or use "\<Esc>" instead
-if exists('+termguicolors')
- let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
- let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
- set termguicolors
-endif
 
 " Set encoding
 if &encoding ==# 'latin1' && !exists('$LANG')
@@ -461,6 +458,44 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufRead * call SyncTree()
 
+" ===== Vim airline ===== "
+" Enable extensions
+let g:airline_extensions = ['branch', 'hunks', 'coc']
+
+" Update section z to just have line number
+let g:airline_section_z = airline#section#create(['linenr'])
+
+" Do not draw separators for empty sections (only for the active window) >
+let g:airline_skip_empty_sections = 1
+
+" Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" Custom setup that removes filetype/whitespace from default vim airline bar
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
+
+" Customize vim airline per filetype
+" 'nerdtree'  - Hide nerdtree status line
+" 'list'      - Only show file type plus current line number out of total
+let g:airline_filetype_overrides = {
+  \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', ''), '' ],
+  \ 'list': [ '%y', '%l/%L'],
+  \ }
+
+" Enable powerline fonts
+let g:airline_powerline_fonts = 1
+
+" Enable caching of syntax highlighting groups
+let g:airline_highlighting_cache = 1
+
+" Define custom airline symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" Don't show git changes to current file in airline
+let g:airline#extensions#hunks#enabled=0
+
 " =====[ NeoSnippet ]=====
 " Map <C-j> as shortcut to activate snippet if available
 imap <C-j> <Plug>(neosnippet_expand_or_jump)
@@ -514,14 +549,7 @@ let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
 " ===[ highlightedyank ]===
 let g:highlightedyank_highlight_duration = 150
-
-" ===[ Lightline ]===
-let g:lightline = {
-      \ 'colorscheme': 'PaperColor'
-      \ }
-" ============================================================================ "
-" ===                           MISC.
-" ============================================================================ "
+" ==============================================================================
 
 " Setting up ignores
 set wildignore+=*.o,*.obj,*.pyc                " output objects
@@ -534,10 +562,96 @@ set wildignore+=*.DS_Store
 set wildignore+=log/**
 set wildignore+=tmp/**
 
+" ============================================================================ "
+" ===                                UI                                    === "
+" ============================================================================ "
+
+" Enable true color support
+" for more details see :h xterm-true-color
+" NOTE: the "^[" is a single character. To insert it, press
+" "Ctrl-v" and then "Esc" or use "\<Esc>" instead
+if exists('+termguicolors')
+ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+ set termguicolors
+endif
+
+" Set preview window to appear at bottom
+set splitbelow
+
+" Vim airline theme
+let g:airline_theme='space'
+
+" ============================================================================ "
+" ===                      CUSTOM COLORSCHEME CHANGES                      === "
+" ============================================================================ "
+" Add custom highlights in method that is executed every time a
+" colorscheme is sourced
+" See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for
+" details
+function! TrailingSpaceHighlights() abort
+  " Hightlight trailing whitespace
+  highlight Trail ctermbg=red guibg=red
+  call matchadd('Trail', '\s\+$', 100)
+endfunction
+
+function! s:custom_jarvis_colors()
+    " coc.nvim color changes
+    hi! link CocErrorSign WarningMsg
+    hi! link CocWarningSign Number
+    hi! link CocInfoSign Type
+
+    " Make background transparent for many things
+    hi! Normal ctermbg=NONE guibg=NONE
+    hi! NonText ctermbg=NONE guibg=NONE
+    hi! LineNr ctermfg=NONE guibg=NONE
+    hi! SignColumn ctermfg=NONE guibg=NONE
+    hi! StatusLine guifg=#16252b guibg=#6699CC
+    hi! StatusLineNC guifg=#16252b guibg=#16252b
+
+    " Try to hide vertical spit and end of buffer symbol
+    hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
+    hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
+
+    " Customize NERDTree directory
+    hi! NERDTreeCWD guifg=#99c794
+
+    " Make background color transparent for git changes
+    hi! SignifySignAdd guibg=NONE
+    hi! SignifySignDelete guibg=NONE
+    hi! SignifySignChange guibg=NONE
+
+    " Highlight git change signs
+    hi! SignifySignAdd guifg=#99c794
+    hi! SignifySignDelete guifg=#ec5f67
+    hi! SignifySignChange guifg=#c594c5
+endfunction
+
+augroup trailing-space-highlight
+  autocmd! ColorScheme * call TrailingSpaceHighlights()
+  autocmd! ColorScheme OceanicNext call s:custom_jarvis_colors()
+augroup END
+
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of preview window when open
+function! Handle_Win_Enter()
+  if &previewwindow
+    setlocal winhighlight=Normal:MarkdownError
+  endif
+endfunction
+
 " Color Theme
 colorscheme gruvbox
 " For gruvbox specifically
 set background=dark
+
+" Make it more obvious where 'ColorColumn' is
+highlight ColorColumn guibg=SlateBlue3
 
 " =============================================================
 " ==> Moving around, tabs, windows and buffers
@@ -562,6 +676,10 @@ map <leader>ew :e %%
 map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
+
+" Easy movement in *INSERT* mode
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
