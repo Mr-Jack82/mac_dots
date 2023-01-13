@@ -310,6 +310,7 @@ set cmdheight=2
 " Nice command completions
 set wildmenu
 set wildmode=full
+set wildoptions=pum,tagfile
 
 " === Completion Settings === "
 
