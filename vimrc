@@ -396,7 +396,7 @@ let g:coc_global_extensions=[
    \ 'coc-sh',
    \ 'coc-tslint-plugin',
    \ 'coc-neosnippet',
-   \ 'coc-lua',
+   \ 'coc-sumneko-lua',
    \ 'coc-pairs'
    \ ]
 
