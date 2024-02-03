@@ -14,6 +14,7 @@
         create: true
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.vim/coc-settings.json: coc-settings.json
     ~/.zprofile: zprofile
     ~/.zshenv: zshenv
     ~/.zshrc: zshrc
