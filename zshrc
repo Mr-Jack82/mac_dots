@@ -325,7 +325,7 @@ export EDITOR="$VISUAL"
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Add JDK/bin folder to be able to use jshell
-export PATH=/usr/lib/jvm/java-13-openjdk/bin:$PATH
+# export PATH=/usr/lib/jvm/java-13-openjdk/bin:$PATH
 # Add 'local/bin' folder to the PATH to be able to use
 # custom scripts
 export PATH=$PATH:~/usr/local/bin
