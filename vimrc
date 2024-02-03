@@ -102,7 +102,7 @@ Plug 'romainl/vim-cool'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'gruvbox-community/gruvbox'
 Plug 'mhartington/oceanic-next'
-Plug 'bluz71/vim-nightfly-colors'
+" Plug 'bluz71/vim-nightfly-colors'
 Plug 'folke/tokyonight.nvim'
 Plug 'sainnhe/sonokai'
 
