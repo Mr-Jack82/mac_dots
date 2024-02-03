@@ -165,8 +165,6 @@ alias grep='grep --color=auto'
 alias l.='ls -d .* --color=tty'
 alias l='colorls --group-directories-first --almost-all'
 alias ll='colorls --group-directories-first --almost-all --long'
-# it is relevant only on my Linux machine
-# alias cf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ldir='ls -d */'
 alias weather='http http://wttr.in/Temruk'
 alias cp='cp -iv'
