@@ -356,3 +356,6 @@ alias luamake=/Users/leeroy/.cache/nvim/nlua/sumneko_lua/3rd/luamake/luamake
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# bun completions
+[ -s "/opt/homebrew/Cellar/bun/1.0.14/share/zsh/site-functions/_bun" ] && source "/opt/homebrew/Cellar/bun/1.0.14/share/zsh/site-functions/_bun"
