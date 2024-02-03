@@ -169,7 +169,8 @@ alias ldir='ls -d */'
 alias weather='http http://wttr.in/Temruk'
 alias cp='cp -iv'
 alias n='nvim'
-alias v='vim'
+# for more info: https://youtu.be/JFr28K65-5E?t=4332
+alias v='vim -c "let g:tty='\''$(tty)'\''"'
 alias ytdl='ytdl-patched'
 
 #Enable Vi mode
