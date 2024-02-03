@@ -1,7 +1,7 @@
 [submodule "config/nvim"]
 	path = config/nvim
-	url = https://github.com/Mr-Jack82/NeonVim.git
-	branch = mine
+	url = git@github.com:NvChad/NvChad.git
+	branch = v2.0
 	ignore = dirty
 [submodule "dotbot"]
 	path = dotbot
